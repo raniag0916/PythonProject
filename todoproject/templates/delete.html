@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <div class="banner-text">
+                    <h1>ToDo</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form role="form" class="p-3 shadow" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Are you sure this task is done?</p>
+    <button type="submit">Confirm</button>
+</form>
+
+{% endblock %}
