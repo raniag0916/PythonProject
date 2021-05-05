@@ -1,0 +1,97 @@
+{% extends 'Dashboard.html' %}
+{% block content %}
+{% load static %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Order Display</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <!-- <li class="breadcrumb-item active">Dashboard v1</li> -->
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Order Display</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table class="table table-bordered">
+                <thead>                  
+                  <tr>
+                    <th>Cartid</th>
+                    <th>Customer Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Adderess</th>
+                    <th>Phone Number</th>
+                    <th>State</th>
+                    <th>Countrty</th>
+                    <th>Zip</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for o in data %}
+                  <tr>
+                    <td>{{o.Cartid}}</td>
+                    <td>{{o.Order_Name}}</td>
+                    <td>{{o.Order_Uname}}</td>
+                    <td>{{o.Order_Email}}</td>
+                    <td>{{o.Order_Address}}</td>
+                    <td>{{o.Order_Phone}}</td>
+                    <td>{{o.Order_State}}</td>
+                    <td>{{o.Order_Country}}</td>
+                    <td>{{o.Order_Zip}}</td>
+                    <td>{{o.Status}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+{% if data.has_other_pages %}
+  <ul class="pagination pagination-sm m-0 float-right">
+    {% if data.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{data.previous_page_number }}">PREVIOUS</a></li>
+    {% else %}
+      <li class="page-item disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in data.paginator.page_range %}
+      {% if data.number == i %}
+        <li class="page-item active"><span class="page-link">{{ i }}<span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i}}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if data.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{data.next_page_number }}">NEXT</a></li>
+    {% else %}
+      <li class="page-item disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+            </div>
+            
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Condensed Full Width Table</h3>
+            </div>
+            <!-- /.card-header -->
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+{% endblock %}

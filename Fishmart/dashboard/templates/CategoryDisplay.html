@@ -1,0 +1,88 @@
+{% extends 'Dashboard.html' %}
+{% block content %}
+{% load static %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Category Regiater</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <!-- <li class="breadcrumb-item active">Dashboard v1</li> -->
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Category Display</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table class="table table-bordered">
+                <thead>                  
+                  <tr>
+                    <th>Category Name</th>
+                    <th>Category Image</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for c in data %}
+                  <tr>
+                    <td>{{c.Category_Name}}</td>
+                    <td>{% if c.Category_Image %}<img src="{{c.Category_Image.url}}" style="height: 50px; width:50px;">{% else %} None {% endif %}
+                    </td>
+                    <td>
+                      <a href="{% url 'deletecategory' ob1id=c.id %}"><button type="submit">Delete</button></a>
+                      <a href="{% url 'updatecategory' ob1id=c.id %}"><button type="submit">Update</button></a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+  {% if data.has_other_pages %}
+  <ul class="pagination pagination-sm m-0 float-right">
+    {% if data.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{data.previous_page_number }}">PREVIOUS</a></li>
+    {% else %}
+      <li class="page-item disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in data.paginator.page_range %}
+      {% if data.number == i %}
+        <li class="page-item active"><span class="page-link">{{ i }}<span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i}}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if data.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{data.next_page_number }}">NEXT</a></li>
+    {% else %}
+      <li class="page-item disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+            </div>
+            
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Condensed Full Width Table</h3>
+            </div>
+            <!-- /.card-header -->
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+{% endblock %}

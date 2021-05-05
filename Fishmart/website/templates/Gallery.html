@@ -1,0 +1,160 @@
+{% extends 'Website.html' %}
+{% block content %}
+{% load static %}
+<!-- Start Atribute Navigation -->
+<div class="attr-nav">
+    <ul>
+        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+        <li class="side-menu">
+            <a href="{% url 'cart' %}" role="submit">
+                <i class="fa fa-shopping-bag"></i>
+                {% if request.session.uname %}
+                <span class="badge">{{item}}</span>
+                {% else %}
+                <span class="badge"></span>
+                {% endif %}
+                <p>My Cart</p>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- End Atribute Navigation -->
+</div>
+<!-- Start Side Menu -->
+<div class="side">
+{% if request.session.uname %}
+<a href="#" class="close-side"><i class="fa fa-times"></i></a>
+<li class="cart-box">
+    <ul class="cart-list">
+        <li>
+            {% for c in cartdata %}
+            {% if c.Productid.Product_Image %}
+            <img src="{{c.Productid.Product_Image.url}}" class="img-fluid" style="height: 20px; width: 20px; ">
+            {% else %} IMAGE {% endif %}
+            <h6><a href="#">{{ c.Productid.Product_Name }} </a></h6>
+            <p>{{ c.Cart_Quantity }} x <span class="price">{{c.Productid.Product_Price}}</span>
+                <span class="price"> = {{c.Cart_Price}}</span>
+            </p>
+            {% endfor %}
+        </li>   
+        <li class="total">
+            <a href="{% url 'cart' %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+            <span class="float-right"><strong></strong></span>
+        </li>                        
+    </ul>
+</li>
+
+{% else %}
+<a href="#" class="close-side"><i class="fa fa-times"></i></a>
+{% endif %}
+</div>
+<!-- End Side Menu -->
+<!-- Start All Title Box -->
+<div class="all-title-box" style="background-image:url({% static 'images/all-bg-title1.jpg' %});">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Gallery </h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Gallery </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+
+    <!-- Start Gallery  -->
+    <div class="products-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-all text-center">
+                        <h1>Our Gallery</h1>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="special-menu text-center">
+                        <div class="button-group filter-button-group">
+                            
+                            <!-- <a href="{% url 'imagecategory' cat="*" %}"><button type="submit">ALL</button></a> -->
+                            <a href="{% url 'imagecategory' cat="SEAFOOD" %}"><button type="submit">SEAFOOD</button></a>
+                            <a href="{% url 'imagecategory' cat="FRESH WATER FISH" %}"><button type="submit">FRESH WATER FISH</button></a>
+                            <a href="{% url 'imagecategory' cat="SHELLFISH" %}"><button type="submit">SHELLFISH</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="row special-list">
+            {% for p in data %}
+                
+                <div class="col-lg-3 col-md-6 special-grid seafood">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            {% if p.Product_Image %}
+                            <img src="{{p.Product_Image.url}}" class="img-fluid" style="height: 250px; width: 250px; ">
+                            {% else %} IMAGE {% endif %}
+                            <!-- <div class="mask-icon">
+                                <ul>
+                                    <li><a href="{% url 'shopdetails' ob2id=p.id %}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li> -->
+                                    <!-- <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li> -->
+                                <!-- </ul>
+                                <a class="cart" href="{% url 'cart' %}" type="submit">Add to Cart</a>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                </div>
+                
+                <!-- <div class="col-lg-3 col-md-6 special-grid fresh-water-fish">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            {% if p.Product_Image %}
+                            <img src="{{p.Product_Image.url}}" class="img-fluid" style="height: 301px; width: 301px; ">
+                            {% else %} IMAGE {% endif %}
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="#">Add to Cart</a>
+                            </div>
+                        </div>                 
+                    </div>
+                </div>
+              
+                <div class="col-lg-3 col-md-6 special-grid shellfish">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            {% if p.Product_Image %}
+                            <img src="{{p.Product_Image.url}}" class="img-fluid" style="height: 301px; width: 301px; ">
+                            {% else %} IMAGE {% endif %}
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="#">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                			
+            
+            </div>
+        </div>
+    </div>
+    <!-- End Gallery  -->
+
+{% endblock %}
+
+
+    

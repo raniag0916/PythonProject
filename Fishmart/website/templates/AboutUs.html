@@ -1,0 +1,127 @@
+{% extends 'Website.html' %}
+{% block content %}
+{% load static %}
+<!-- Start All Title Box -->
+<div class="all-title-box" style="background-image:url({% static 'images/all-bg-title1.jpg' %});">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>About Us </h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">About Us </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+
+<!-- Start About Page  -->
+<div class="about-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="banner-frame"> <img class="img-fluid" src="images/about-img.jpg" alt="" />
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h2 class="noo-sh-title-top">Healthy Fish – Gives you the utmost premier experience of seafood </h2>
+                <p>Our mission is to serve you with high quality, delicious and most importantly healthy seafood that will 
+                    give rise to a healthy generation. Our services allows you to be free from the drudgery of sea food 
+                    shopping process and makes it an easy relaxed manner of browsing and shopping for healthy high quality 
+                    seafood. Discover the new modern way to shop for all your sea food needs from the comfort of your home. 
+                    No more getting stuck in traffic jams, paying for parking, standing in long queues and carrying heavy bags 
+                    or getting your hands dirty which are the usual hassles of sea food shopping – get all the seafood you 
+                    need, when you need, right at your doorstep at the click of a button. Sea Food shopping online is 
+                    now easy as all the fresh sea food you need is available to you at our online store – Healthy Fish.</p>
+                <p>Healthy Fish online store was launched in the mid of 2014. With our easy to use online store, you can 
+                    explore fresh sea right now using your PC or smartphone. We offer the best quality 
+                    marine fish, farm fresh fishes, crabs , shrimps , lobsters and every other sea food you can think of.</p>
+                <!-- <a class="btn hvr-hover" href="#">Read More</a> -->
+            </div>
+        </div>
+        <!-- <div class="row my-5">
+            <div class="col-sm-6 col-lg-4">
+                <div class="service-block-inner">
+                    <h3>We are Trusted</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="service-block-inner">
+                    <h3>We are Professional</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="service-block-inner">
+                    <h3>We are Expert</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                </div>
+            </div>
+        </div> -->
+        <div class="row my-4">
+            <div class="col-12">
+                <h2 class="noo-sh-title">Meet Our Team</h2>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="hover-team">
+                    <div class="our-team"> <img src="images/img-1.jpg" alt="" />
+                        <div class="team-content">
+                            <h3 class="title">Mr Satheesh G Sarasan</h3> <span class="post">CEO</span> </div>
+                        <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
+                    </div>
+                    <div class="team-description">
+                        <p> Mr. Satheesh G Sarasan is the founder and CEO of Healthy Fish powered by Sympan Traders. He worked in the
+                             banking sector as a senior officer for more than 13 years. His mission behind founding Healthy Fish is to
+                              serve the society with quality products and to engender a healthy generation. </p>
+                    </div>
+                    <hr class="my-0"> </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="hover-team">
+                    <div class="our-team"> <img src="images/img-2.jpg" alt="" />
+                        <div class="team-content">
+                            <h3 class="title">Akshara Satheesh</h3> <span class="post">Director</span> </div>
+                        <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
+                    </div>
+                    <div class="team-description">
+                        <p>Mrs Akshara Satheesh is the pillar of support who empowers all aspects of CEO s vision.
+                             She also looks after the legal and technical side of the company </p>
+                    </div>
+                    <hr class="my-0"> </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="hover-team">
+                    <div class="our-team"> <img src="images/img-3.jpg" alt="" />
+                        <div class="team-content">
+                            <h3 class="title"> Dr.P.Mohandas</h3> <span class="post">Director</span> </div>
+                        <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
+                    </div>
+                    <div class="team-description">
+                        <p>Dr P Mohandas joined as the director during our successful journey towards our goals.
+                             He  looks after the expansion of Healthy Fish and other divisions of Sympan Traders. </p>
+                    </div>
+                    <hr class="my-0"> </div>
+            </div>
+            <div class="col-sm-6 col-lg-3"> 
+                <div class="hover-team">
+                    <div class="our-team"> <img src="images/img-1.jpg" alt="" />
+                        <div class="team-content">
+                            <h3 class="title">Prof.Dr.MK Mukundan</h3> <span class="post">Technical Advisor</span> </div>
+                        
+                        <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
+                    </div>
+                    <div class="team-description">
+                        <p>Prof.Dr.MK.Mukundan a remarkable personality to our company plays an important role  in the advisory board.
+                            He gives his valuable feedback to keep the standard of our products and brand. </p>
+                    </div>
+                    <hr class="my-0"> </div>
+            </div> 
+        </div>
+    </div>
+</div>
+<!-- End About Page -->
+
+{% endblock %}

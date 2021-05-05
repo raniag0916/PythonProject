@@ -1,0 +1,75 @@
+{% extends 'Website.html' %}
+{% block content %}
+{% load static %}
+<!-- Start All Title Box -->
+<div class="all-title-box" style="background-image:url({% static 'images/all-bg-title1.jpg' %});">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Wishlist </h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Wishlist </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+
+<!-- Start Wishlist  -->
+<div class="wishlist-box-main">
+    <div class="container">
+        <div class="row">
+            {% for p in pdata %}
+            <div class="col-lg-12">
+                <div class="table-main table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Images</th>
+                                <th>Product Name</th>
+                                <th>Unit Price </th>
+                                <th>Stock</th>
+                                <th>Add Item</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="thumbnail-img">
+                                    <a href="#">
+                                    {% if p.Product_Image %}
+                                    <img src="{{p.Product_Image.url}}" class="img-fluid" style="height: 300px; width: 300px;">
+                                    {% else %} IMAGE {% endif %}
+                            </a>
+                                </td>
+                                <td class="name-pr">
+                                    <a href="#">
+                                    {{ p.Product_Name }}
+                            </a>
+                                </td>
+                                <td class="price-pr">
+                                    <p>{{ p.Product_Price }}</p>
+                                </td>
+                                <td class="quantity-box">{{ p.Product_Stock }}</td>
+                                <td class="add-pr">
+                                    <a class="cart" href="{% url 'cart' ob2id=p.id %}" type="submit">Add to Cart</a>
+                                </td>
+                                <td class="remove-pr">
+                                    <a href="#">
+                                <i class="fas fa-times"></i>
+                            </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- End Wishlist -->
+
+{% endblock %}

@@ -1,0 +1,188 @@
+{% extends 'Website.html' %}
+{% block content %}
+{% load static %}
+<!-- Start Atribute Navigation -->
+<div class="attr-nav">
+    <ul>
+        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+        <li class="side-menu">
+            <a href="{% url 'cart' %}" role="submit">
+                <i class="fa fa-shopping-bag"></i>
+                {% if request.session.uname %}
+                <span class="badge">{{item}}</span>
+                {% else %}
+                <span class="badge"></span>
+                {% endif %}
+                <p>My Cart</p>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- End Atribute Navigation -->
+</div>
+<!-- Start Side Menu -->
+<div class="side">
+{% if request.session.uname %}
+<a href="#" class="close-side"><i class="fa fa-times"></i></a>
+<li class="cart-box">
+    <ul class="cart-list">
+        <li>
+            {% for c in cartdata %}
+            {% if c.Productid.Product_Image %}
+            <img src="{{c.Productid.Product_Image.url}}" class="img-fluid" style="height: 20px; width: 20px; ">
+            {% else %} IMAGE {% endif %}
+            <h6><a href="#">{{ c.Productid.Product_Name }} </a></h6>
+            <p>{{ c.Cart_Quantity }} x <span class="price">{{c.Productid.Product_Price}}</span>
+                <span class="price"> = {{c.Cart_Price}}</span>
+            </p>
+            {% endfor %}
+        </li>   
+        <li class="total">
+            <a href="{% url 'cart' %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+            <span class="float-right"><strong></strong></span>
+        </li>                        
+    </ul>
+</li>
+
+{% else %}
+<a href="#" class="close-side"><i class="fa fa-times"></i></a>
+{% endif %}
+</div>
+<!-- End Side Menu -->
+<!-- Start All Title Box -->
+<div class="all-title-box" style="background-image:url({% static 'images/all-bg-title1.jpg' %});">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Shop </h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Shope </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+
+    <!-- Start Shop Page  -->
+    <div class="shop-box-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
+                    <div class="right-product-box">
+                        <div class="product-item-filter row">
+                            <div class="col-12 col-sm-8 text-center text-sm-left">
+                                <div class="toolbar-sorter-right">
+                                    <span>Sort by </span>
+                                    <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
+									<option data-display="Select">Nothing</option>
+									<option value="1">Popularity</option>
+									<option value="2">High Price → High Price</option>
+									<option value="3">Low Price → High Price</option>
+									<option value="4">Best Selling</option>
+								</select>
+                                </div>
+                                <p>Showing all 4 results</p>
+                            </div>
+                            <div class="col-12 col-sm-4 text-center text-sm-right">
+                                <ul class="nav nav-tabs ml-auto">
+                                    <li>
+                                        <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i class="fa fa-th"></i> </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#list-view" data-toggle="tab"> <i class="fa fa-list-ul"></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="product-categorie-box">       
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+                                    <div class="row">
+                                        {% for p in pdata %}   
+                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">  
+                                            <div class="products-single fix">
+                                                <div class="box-img-hover">
+                                                    <!-- <div class="type-lb">
+                                                        <p class="sale">Sale</p>
+                                                    </div> -->
+                                                    {% if p.Product_Image %}
+                                                    <img src="{{p.Product_Image.url}}" class="img-fluid" style="height: 300px; width: 300px;">
+                                                    {% else %} IMAGE {% endif %}
+                                                    <div class="mask-icon">
+                                                        <ul>
+                                                            <li><a href="{% url 'shopdetails' ob2id=p.id %}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li> 
+                                                        </ul>
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="why-text">
+                                                    <h4>{{p.Product_Name}}</h4>
+                                                    <h5>&#8377; {{p.Product_Price}} /Kg</h5>
+                                                </div>
+                                            </div>                                     
+                                        </div>
+                                        {% endfor %}
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+				<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
+                    <div class="product-categori">
+                        <div class="search-product">
+                            <form action="#">
+                                <input class="form-control" placeholder="Search here..." type="text">
+                                <button type="submit"> <i class="fa fa-search"></i> </button>
+                            </form>
+                        </div>
+                        <div class="filter-sidebar-left">
+                            <div class="title-left">
+                                <h3>Categories</h3>
+                            </div>
+                            {% for c in cdata %}
+                            <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
+                                <div class="list-group-collapse sub-men">
+                                    <a class="list-group-item list-group-item-action" href="#sub-men1" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">{{c.Category_Name}} <small class="text-muted">(100)</small>
+								</a>
+                                    <!-- <div class="collapse show" id="sub-men1" data-parent="#list-group-men">
+                                        <div class="list-group">
+                                            <a href="#" class="list-group-item list-group-item-action active">Fruits 1 <small class="text-muted">(50)</small></a>
+                                            <a href="#" class="list-group-item list-group-item-action">Fruits 2 <small class="text-muted">(10)</small></a>
+                                            <a href="#" class="list-group-item list-group-item-action">Fruits 3 <small class="text-muted">(10)</small></a>
+                                            <a href="#" class="list-group-item list-group-item-action">Fruits 4 <small class="text-muted">(10)</small></a>
+                                            <a href="#" class="list-group-item list-group-item-action">Fruits 5 <small class="text-muted">(20)</small></a>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!-- <div class="filter-price-left">
+                            <div class="title-left">
+                                <h3>Price</h3>
+                            </div>
+                            <div class="price-box-slider">
+                                <div id="slider-range"></div>
+                                <p>
+                                    <input type="text" id="amount" readonly style="border:0; color:#f3ae0e; font-weight:bold;">
+                                    <button class="btn hvr-hover" type="submit">Filter</button>
+                                </p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Shop Page -->
+
+
+{% endblock %}
+
+    

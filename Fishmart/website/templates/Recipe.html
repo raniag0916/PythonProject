@@ -1,0 +1,134 @@
+{% extends 'Website.html' %}
+{% block content %}
+{% load static %}
+<!-- Start Atribute Navigation -->
+<div class="attr-nav">
+    <ul>
+        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+        <li class="side-menu">
+            <a href="{% url 'cart' %}" role="submit">
+                <i class="fa fa-shopping-bag"></i>
+                {% if request.session.uname %}
+                <span class="badge">{{item}}</span>
+                {% else %}
+                <span class="badge"></span>
+                {% endif %}
+                <p>My Cart</p>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- End Atribute Navigation -->
+</div>
+<!-- Start Side Menu -->
+<div class="side">
+{% if request.session.uname %}
+<a href="#" class="close-side"><i class="fa fa-times"></i></a>
+<li class="cart-box">
+    <ul class="cart-list">
+        <li>
+            {% for c in cartdata %}
+            {% if c.Productid.Product_Image %}
+            <img src="{{c.Productid.Product_Image.url}}" class="img-fluid" style="height: 20px; width: 20px; ">
+            {% else %} IMAGE {% endif %}
+            <h6><a href="#">{{ c.Productid.Product_Name }} </a></h6>
+            <p>{{ c.Cart_Quantity }} x <span class="price">{{c.Productid.Product_Price}}</span>
+                <span class="price"> = {{c.Cart_Price}}</span>
+            </p>
+            {% endfor %}
+        </li>   
+        <li class="total">
+            <a href="{% url 'cart' %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+            <span class="float-right"><strong></strong></span>
+        </li>                        
+    </ul>
+</li>
+
+{% else %}
+<a href="#" class="close-side"><i class="fa fa-times"></i></a>
+{% endif %}
+</div>
+<!-- End Side Menu -->
+
+<!-- Start All Title Box -->
+<div class="all-title-box" style="background-image:url({% static 'images/all-bg-title1.jpg' %});">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Recipe </h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Recipe </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+
+    <!-- Start Shop Detail  -->
+<!-- <div class="container-fluid recipe">
+    {% for r in rdata %}
+    <div class="container clearfix">
+       <div class="row">          
+          <div class="col-12 col-sm-12 col-md-10 col-lg-11 pl-0 pr-0 hf-container order-12 order-md-1">
+             <div class="recipe-card">
+                <div class="item-isotope">
+                   <article class="pluto-post-box">
+                      <div class="post-body">
+                         <div class="post-media-body">
+                            <div class="figure-link-w">
+                               <a href="#" class="figure-link ">
+                                  <figure class="abs-image">
+                                      {% if r.Recipe_Image %}
+                                     <img width="250" height="250" src="{{r.Recipe_Image.url}}" class="attachment-pluto-index-width size-pluto-index-width wp-post-image" alt="">
+                                     {% else %} IMAGE {% endif %}
+                                     <div class="figure-shade"></div>
+                                     <i class="figure-icon os-new-icon os-new-icon-eye icon-view"></i>
+                                  </figure>
+                               </a>
+                            </div>
+                         </div>
+                         <div class="post-content-body">
+                            <h4 class="post-title entry-title">
+                               <a href="#">Fish Curry</a>
+                            </h4>
+                            <div class="post-content entry-summary">
+                               <p>{{r.Recipe_Description}}</p>
+                            </div>
+                         </div>
+                      </div>
+                   </article>
+                </div>                                                            
+             </div>
+          </div>         
+       </div>
+    </div>
+    {% endfor %}
+</div> -->
+
+<div class="row special-list">
+    {% for r in rdata %}
+    <div class="col-lg-3 col-md-6 special-grid best-seller">
+        <div class="products-single fix">
+            <div class="box-img-hover">
+                <!-- <div class="type-lb">
+                    <p class="sale">Sale</p>
+                </div> -->
+                <br>
+                {% if r.Recipe_Image %}
+                <img src="{{r.Recipe_Image.url}}" class="img-fluid" style="height: 300px; width: 300px;">
+                {% else %} IMAGE {% endif %}
+            </div>
+            <div class="why-text">
+                <h4>{{r.Recipe_Name}}</h4>
+                <br>
+                <a href="{% url 'recipedetails' ob3id=r.id %}"><button class="btn hvr-hover" type="submit">Details</button> </a>
+            </div>
+        </div>
+    </div> 
+    {% endfor %}        
+</div>
+
+ <!-- End Recipe -->
+{% endblock %}

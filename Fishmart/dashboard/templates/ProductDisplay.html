@@ -1,0 +1,99 @@
+{% extends 'Dashboard.html' %}
+{% block content %}
+{% load static %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Product Display</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <!-- <li class="breadcrumb-item active">Dashboard v1</li> -->
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Product Display</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table class="table table-bordered">
+                <thead>                  
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Product Category</th>
+                    <th>Product Image</th>
+                    <th>Product Stock Details</th>
+                    <th>Product Quantity in Weight</th>
+                    <th>Product Price per Kilogram</th>
+                    <th>Product Description</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for p in data %}
+                  <tr>
+                    <td>{{p.Product_Name}}</td>
+                    <td>{{p.Product_Category}}</td>
+                    <td>{% if p.Product_Image %}<img src="{{p.Product_Image.url}}" style="height: 50px; width:50px;">{% else %} None {% endif %}
+                    </td>
+                    <td>{{p.Product_Stock}}</td>
+                    <td>{{p.Product_Quantity}}</td>
+                    <td>{{p.Product_Price}}</td>
+                    <td>{{p.Product_Description}}</td>
+                    <td>
+                      <a href="{% url 'deleteproduct' ob2id=p.id %}"><button type="submit">Delete</button></a>
+                       <br><br>
+                      <a href="{% url 'updateproduct' ob2id=p.id %}"><button type="submit">Update</button></a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+{% if data.has_other_pages %}
+  <ul class="pagination pagination-sm m-0 float-right">
+    {% if data.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{data.previous_page_number }}">PREVIOUS</a></li>
+    {% else %}
+      <li class="page-item disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in data.paginator.page_range %}
+      {% if data.number == i %}
+        <li class="page-item active"><span class="page-link">{{ i }}<span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i}}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if data.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{data.next_page_number }}">NEXT</a></li>
+    {% else %}
+      <li class="page-item disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+            </div>
+            
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Condensed Full Width Table</h3>
+            </div>
+            <!-- /.card-header -->
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+{% endblock %}

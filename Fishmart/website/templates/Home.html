@@ -1,0 +1,198 @@
+{% extends 'Website.html' %}
+{% block content %}
+{% load static %}
+<body>
+        <!-- Start Atribute Navigation -->
+        <div class="attr-nav">
+            <ul>
+                <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                <li class="side-menu">
+                    <a href="{% url 'cart' %}" role="submit">
+                        <i class="fa fa-shopping-bag"></i>
+                        {% if request.session.uname %}
+                        <span class="badge">{{item}}</span>
+                        {% else %}
+                        <span class="badge"></span>
+                        {% endif %}
+                        <p>My Cart</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- End Atribute Navigation -->
+    </div>
+     <!-- Start Side Menu -->
+    <div class="side">
+        {% if request.session.uname %}
+        <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+        <li class="cart-box">
+            <ul class="cart-list">
+                <li>
+                    {% for c in cartdata %}
+                    {% if c.Productid.Product_Image %}
+                    <img src="{{c.Productid.Product_Image.url}}" class="img-fluid" style="height: 20px; width: 20px; ">
+                    {% else %} IMAGE {% endif %}
+                    <h6><a href="#">{{ c.Productid.Product_Name }} </a></h6>
+                    <p>{{ c.Cart_Quantity }} x <span class="price">{{c.Productid.Product_Price}}</span>
+                        <span class="price"> = {{c.Cart_Price}}</span>
+                    </p>
+                    {% endfor %}
+                </li>   
+                <li class="total">
+                    <a href="{% url 'cart' %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                    <span class="float-right"><strong></strong></span>
+                </li>                        
+            </ul>
+        </li>
+        
+        {% else %}
+        <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+        {% endif %}
+    </div>
+    <!-- End Side Menu -->
+    </header>
+    <!-- End Main Top -->
+
+    <!-- Start Top Search -->
+    <div class="top-search">
+        <div class="container">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <!-- End Top Search -->
+
+    <!-- Start Slider -->
+    <div id="slides-shop" class="cover-slides">
+        <ul class="slides-container">
+            <li class="text-center">
+                <img src="{% static 'images/banner1.jpg' %}" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="m-b-20"><strong>Welcome To <br> BigFish</strong></h1>
+                            <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
+                            <p><a class="btn hvr-hover" href="{% url 'shop' %}">Shop Now</a></p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="text-center">
+                <img src="{% static 'images/banner2.jpg' %}" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="m-b-20"><strong>Welcome To <br> BigFish</strong></h1>
+                            <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
+                            <p><a class="btn hvr-hover" href="{% url 'shop' %}">Shop Now</a></p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="text-center">
+                <img src="{% static 'images/banner3.jpg' %}" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="m-b-20"><strong>Welcome To <br> BigFish</strong></h1>
+                            <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
+                            <p><a class="btn hvr-hover" href="{% url 'shop' %}">Shop Now</a></p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="slides-navigation">
+            <a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            <a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <!-- End Slider -->
+
+    <!-- Start Categories  -->
+    <div class="categories-shop">
+        <div class="container">
+            <div class="row">
+                {% for c in cdata %}
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="shop-cat-box">
+                        {% if c.Category_Image %}<img class="img-fluid" src="{{c.Category_Image.url}}" style="height: 400px; width: 400px;" alt="" >{% else %} None {% endif %}
+                        <a class="btn hvr-hover" href="#">{{c.Category_Name}}</a>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+    <!-- End Categories -->
+	
+	<!-- <div class="box-add-products">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<div class="offer-box-products">
+						<img class="img-fluid" src="{% static 'images/add-img-01.jpg' %}" alt="" />
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<div class="offer-box-products">
+						<img class="img-fluid" src="{% static 'images/add-img-02.jpg' %}" alt="" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+    <!-- Start Products  -->
+    <div class="products-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-all text-center">
+                        <h1>Healthy And Fresh Fish</h1>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row special-list">
+                {% for p in pdata %}
+                <div class="col-lg-3 col-md-6 special-grid best-seller">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <!-- <div class="type-lb">
+                                <p class="sale">Sale</p>
+                            </div> -->
+                            {% if p.Product_Image %}
+                            <img src="{{p.Product_Image.url}}" class="img-fluid" style="height: 300px; width: 300px;">
+                            {% else %} IMAGE {% endif %}
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="{% url 'shopdetails' ob2id=p.id %} " data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <!-- <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li> -->
+                                    <!-- <li><a href="{% url 'wishlist' ob2id=p.id %} " data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li> -->
+                                </ul>
+                                
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>{{p.Product_Name}}</h4>
+                            <h5>&#8377; {{p.Product_Price}} /Kg</h5>
+                        </div>
+                    </div>
+                </div> 
+                {% endfor %}         
+            </div>
+             
+        </div>
+    </div>
+    <!-- End Products  -->
+
+    
+{% endblock %}
+
+    
