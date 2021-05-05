@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+           Student Registration Page
+        </title>
+        <link rel="stylesheet" href="{% static 'styl.css' %}">
+        <style>
+
+        </style>
+    </head>
+    <body class="bd">
+        <!--for heading-->
+        <h1 class="h1">
+            STUDENT REGISTRATION FORM..
+        </h1>
+        <h2 id="h2">
+            welcome
+        </h2>
+        {% for s in sdata%}
+        <form method='post' action="{% url 'studentupdate' obid=s.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label >Name: </label>
+            <input type="text" name="sname" value="{{s.stud_Name}}">
+            <br><br>
+            <label >Address: </label>
+            <input type="text" name="saddr" value="{{s.stud_Address}}">
+            <br><br>
+            <label >Email id: </label>
+            <input type="email" id="eid" name="seid" value="{{s.stud_Email}}">
+            <br><br>
+            <label >Password: </label>
+            <input type="text" id="pass" name="spass" value="{{s.stud_Password}}" >
+            <br><br>
+            <label>District: </label>
+            <select id="dist" name="sdist" value="{{s.stud_Dist}}" > 
+                <option value="kozhikode">Kozhikode</option>
+                <option value="kannur">Kannur</option>
+                <option value="ernakulam">Ernakukam</option>
+                <option value="alappuzha">Alappuzha</option>
+            </select>
+            <br><br>
+            <label>Gender: </label>
+        
+            {% if s.stud_Gender == "male" %}
+            
+            <label for="male">Male</label>
+            <input type="radio" id="male" value="male" name="sgen" checked >
+            <label for="female">Female</label>
+            <input type="radio" id="female" value="female" name="sgen" >
+            <label for="others">Others</label>
+            <input type="radio" id="others" value="others" name="sgen" >
+            {% elif s.stud_Gender == "female" %}
+            <label for="male">Male</label>
+            <input type="radio" id="male" value="male" name="sgen" >
+            <label for="female">Female</label>
+            <input type="radio" id="female" value="female" name="sgen" checked >
+            <label for="others">Others</label>
+            <input type="radio" id="others" value="others" name="sgen" >
+            {% else %}
+            <label for="male">Male</label>
+            <input type="radio" id="male" value="male" name="sgen" >
+            <label for="female">Female</label>
+            <input type="radio" id="female" value="female" name="sgen" >
+            <label for="others">Others</label>
+            <input type="radio" id="others" value="others" name="sgen" checked >
+            {% endif %}
+            <br><br>
+            <div>
+            <label>Image:</label>
+            {% if s.stud_image %}
+            
+            <img src="{{s.stud_image.url}}" style="float:none;width:50px;height:50px;">
+            {% else %}
+            none
+            {% endif %}
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label>upload New image:</label>
+                <input type="file" id="image" name="image" >
+            </div>
+            <button type="submit" class="button">SUBMIT</button>
+
+        </form> 
+        {% endfor %}         
+    </body>
+</html>

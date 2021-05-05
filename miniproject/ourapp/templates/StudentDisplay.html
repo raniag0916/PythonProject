@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            Student details to display
+        </title>
+        <link rel="stylesheet" href="{% static 'styl.css' %}">
+        <style>
+            table 
+            {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+
+        </style>
+    </head>
+    <body class="bd">
+        <h1 class="h1">
+            Display Student Details
+        </h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Email id</th>
+                        <th>Password</th>
+                        <th>District</th>
+                        <th>Gender</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in sdata %}
+                    
+                    <tr>
+                        <td>{{s.stud_Name}}</td>
+                        <td>{{s.stud_Address}}</td>
+                        <td>{{s.stud_Email}}</td>
+                        <td>{{s.stud_Password}}</td>
+                        <td>{{s.stud_Dist}}</td>
+                        <td>{{s.stud_Gender}}</td>
+                        
+                        <td>{% if s.stud_image %}<img src="{{s.stud_image.url}}" style="height:50px;width:50px;">{% else %}None{% endif %} </td>
+                        <td>
+                            <a href="{% url 'deletestud' obid=s.id%}"><button type="submit">Delete</button></a>
+                            <a href="{% url 'updatestud' obid=s.id%}"><button type="submit">Update</button></a>
+                        </td>                            
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </body>
+</html>

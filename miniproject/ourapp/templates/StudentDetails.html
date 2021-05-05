@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+           Student Registration Page
+        </title>
+        <link rel="stylesheet" href="{% static 'styl.css' %}">
+        <style>
+
+        </style>
+    </head>
+    <body class="bd">
+        <!--for heading-->
+        <h1 class="h1">
+            STUDENT REGISTRATION FORM..
+        </h1>
+        <h2 id="h2">
+            welcome
+        </h2>
+        <form method='post' action="{% url 'studentdata' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label >Name: </label>
+            <input type="text" name="sname">
+            <br><br>
+            <label >Adress: </label>
+            <input type="text" name="saddr">
+            <br><br>
+            <label >Email id: </label>
+            <input type="email" id="eid" name="seid" >
+            <br><br>
+            <label >Password: </label>
+            <input type="text" id="pass" name="spass" >
+            <br><br>
+            <label>District: </label>
+            <select id="dist" name="sdist" > 
+                <option value="kasarkode">Kasarkode</option>
+                <option value="kozhikode">Kozhikode</option>
+                <option value="Wayanadu">Wayanadu</option>
+                <option value="Kannur">Kannur</option>
+                <option value="Thrissur">Thrissur</option>
+                <option value="Malappuram">Malappuram</option>
+                <option value="Palakkad">Palakkad</option>
+                <option value="Ernakukam">Ernakukam</option>
+                <option value="Idukki">Idukki</option>
+                <option value="Kottayam">Kottayam</option>
+                <option value="Alappuzha">Alappuzha</option>
+                <option value="Pthanamthitta">Pthanamthitta</option>
+                <option value="Kollam">Kollam</option>
+                <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+            </select>
+            <br><br>
+            <label>Gender: </label>
+            <label for="male">Male</label>
+            <input type="radio" id="male" value="male" name="sgen" >
+            <label for="female">Female</label>
+            <input type="radio" id="female" value="female" name="sgen" >
+            <label for="others">Others</label>
+            <input type="radio" id="others" value="others" name="sgen" >
+            <br><br>
+            <label>Image</label>
+            <input type="file" id="image" name="image" >
+            <br><br><br>
+            <button type="submit" class="button">SUBMIT</button>
+
+        </form>          
+    </body>
+</html>

@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>
+            home
+        </title>
+    </head>
+    <body>
+        <h1>ACCOUNT INFO</h1>
+        <h2>{{request.session.name}}</h2>
+        <h2>{{request.session.dob}}</h2>
+        <h2>{{request.session.email}}</h2>
+        <h2>{{request.session.pass}}</h2>
+        <a href="{% url 'logout' %}">LOGOUT</a>
+    </body>
+</html>
