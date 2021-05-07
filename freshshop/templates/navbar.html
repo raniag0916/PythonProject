@@ -1,0 +1,36 @@
+
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'shop:allProdCat' %}">Fresh Shop</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="nav navbar-nav">
+<!--      <div>-->
+<!--        <li class="active"><a href="{% url 'shop:allProdCat' %}"><b>Home  </b></a></li>-->
+<!--      </div>-->
+
+      <div class="collapse navbar-collapse">
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><b>    Shop Now</b> <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'shop:allProdCat' %}">All Products</a></li>
+          {% for l in links %}
+          <li><a href="{{ l.get_url }}">{{ l.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+      </div>
+      {% if item_count > 0 %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'cart:cart_detail' %}"><i class="fa fa-shopping-cart"></i>({{item_count}})</a>
+      </li>
+      {% endif %}
+    </ul>
+    <form class="d-flex" action="{% url 'search_app:SearchResult' %}" method="get">
+        {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Search" name="q" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
+      </form>
+  </div>
+</nav>

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    {% if category %}
+        {{ category.description|truncatewords:100 }}
+    {% else %}
+        Welcome to Fresh Shop where you can buy different items..................
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+    {% if category %}
+        {{ category.name }} - Fresh Shop
+    {% else %}
+        See our new collections........
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if category %}
+        <div>
+            <div class="row my_row_class">
+                <div class="mx-auto">
+                    <p><a href="{% url 'shop:allProdCat' %}">Our Products Collection</a></p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+<div>
+    {% if category %}
+    <div class="mx-auto">
+        <img class="my_image" src="{{ category.image.url }}" alt="{{ category.name }}">
+    </div>
+    <div>
+        <h1 class="text-center my-title">{{ category.name }}</h1>
+        <h3>{{ category.price }}</h3>
+        <p class="text-justify">{{ category.description }}</p>
+    </div>
+    {% else %}
+    <div>
+        <img class="my_image my_image_padding" src="{% static 'image/banner_image.jpg' %}" alt="Our Product">
+    </div>
+    <br>
+    <div>
+        <h1 class="text-center my-title">Our Product Collections</h1>
+        <p class="text-justify">Fruits and vegetables contain important vitamins, minerals and plant chemicals. They also contain fibre. There are many varieties of fruit and vegetables available and many ways to prepare, cook and serve them. A diet high in fruit and vegetables can help protect you against cancer, diabetes and heart disease.</p>
+    </div>
+    {% endif %}
+    <div class="container">
+        <div class="row mx-auto">
+            {% for product in products.object_list %}
+            <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">
+                <div class="card text-center" style="min-width:18rem;">
+                    <a href="{{ product.get_url }}"><img class="card-img-top my_image" src="{{ product.image.url }}" alt="{{ product.name }}"></a>
+                    <div class="card-body">
+                        <h4><b>{{ product.name }}</b></h4>
+                        <p>&#8377;.{{ product.price }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="mx-auto">
+            {% if products.paginator.num_pages %}
+                <hr>
+                <div class="text-center">
+                    {% for pg in products.paginator.page_range %}
+                        <a href="?page={{pg}}" class="btn btn-light btn-sm {% if product.number == pg %} active {% endif %}">{{ pg }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <br>
+    </div>
+</div>
+{% endblock %}
